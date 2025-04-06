@@ -1,32 +1,149 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title id="title"></title>
-<meta http-equiv="refresh" content="2; url=http://www.youtube.com">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<link rel="stylesheet" href="css.css">
-<script language="JavaScript">
-<!--
-    function startClock() {
-        $(if popup == 'true')
-        open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=,status=0,menubars=0,resizable=1,width=290,height=200');
-	$(endif)
-	location.href = 'https://m.youtube.com';
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-//-->
-</script>
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4CAF50;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #error-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-<body onLoad="startClock()">
-<table width="100%" height="100%">
-<tr>
-	<td align="center" valign="middle">
-    
-<img class="d-block w-100" style="width:100%; max-width: 607px; height:auto;" src="1742213301965.jpg" alt="First slide">
-		    </div>
-<script type="text/javascript">
-	document.getElementById('title').innerHTML = window.location.hostname + " > redirect";
-</script>
+<body>
+  <div class="login-container">
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo" class="logo" />
+    </div>
+
+    <h2>ASIF TELECOM</h2>
+    <form id="login-form">
+      <input type="password" id="password" name="password" required />
+      <label for="remember-me">
+        <input type="checkbox" id="remember-me" name="remember-me" /> Remember Me
+      </label>
+      <button type="submit">Login</button>
+    </form>
+    <p id="error-message"></p>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const password = document.getElementById("password").value;
+      const rememberMe = document.getElementById("remember-me").checked;
+
+      const correctPassword = "123456777";
+
+      if (password === correctPassword) {
+        if (rememberMe) {
+          localStorage.setItem("password", password);
+          document.cookie = "password=" + password + "; path=/; max-age=" + 60 * 60 * 24 * 30;
+        } else {
+          localStorage.removeItem("password");
+          document.cookie = "password=; path=/; max-age=0";
+        }
+        window.location.href = "https://m.youtube.com";
+      } else {
+        document.getElementById("error-message").textContent = "Incorrect password.";
+      }
+    });
+
+    window.onload = function() {
+      const savedPasswordFromLocalStorage = localStorage.getItem("password");
+      const savedPasswordFromCookies = getCookie("password");
+
+      const savedPassword = savedPasswordFromLocalStorage || savedPasswordFromCookies;
+
+      if (savedPassword) {
+        document.getElementById("password").value = savedPassword;
+        document.getElementById("remember-me").checked = true;
+      }
+    };
+
+    function getCookie(name) {
+      let nameEQ = name + "=";
+      let ca = document.cookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+  </script>
 </body>
 </html>
