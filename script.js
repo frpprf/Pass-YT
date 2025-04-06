@@ -21,7 +21,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
       localStorage.removeItem("password");
       document.cookie = "password=; path=/; max-age=0"; // Cookies মুছে ফেলা
     }
-    window.location.href = "dashboard.html"; // লগইন সফল হলে ড্যাশবোর্ড পেজে রিডাইরেক্ট
+    window.location.href = "https://m.youtube.com"; // লগইন সফল হলে ড্যাশবোর্ড পেজে রিডাইরেক্ট
   } else {
     document.getElementById("error-message").textContent = "Incorrect password."; // ভুল হলে এরর মেসেজ
   }
