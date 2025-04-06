@@ -1,32 +1,33 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title id="title"></title>
-<meta http-equiv="refresh" content="5; url=http://www.youtube.com">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="expires" content="-1">
-<link rel="stylesheet" href="css.css">
-<script language="JavaScript">
-<!--
-    function startClock() {
-        $(if popup == 'true')
-        open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=,status=0,menubars=0,resizable=1,width=290,height=200');
-	$(endif)
-	location.href = 'https://m.youtube.com';
-    }
-//-->
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body onLoad="startClock()">
-<table width="100%" height="100%">
-<tr>
-	<td align="center" valign="middle">
-    
-<img class="d-block w-100" style="width:100%; max-width: 607px; height:auto;" src="1742213301965.jpg" alt="First slide">
-		    </div>
-<script type="text/javascript">
-	document.getElementById('title').innerHTML = window.location.hostname + " > redirect";
-</script>
+<body>
+  <div class="login-container">
+    <!-- গোল লোগো -->
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo" class="logo">
+    </div>
+
+    <h2>ASIF TELECOM</h2>
+    <form id="login-form">
+      
+      <input type="password" id="password" name="password" required>
+
+      <!-- Remember Me Checkbox -->
+      <label for="remember-me">
+        <input type="checkbox" id="remember-me" name="remember-me"> Remember Me
+      </label>
+
+      <button type="submit">Login</button>
+    </form>
+    <p id="error-message"></p>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
