@@ -100,8 +100,8 @@
   </div>
 
   <script>
-    const correctPassword = "12345677";
-    const redirectURL = "https://m.youtube.com"; // চাইলে অন্য লিংক দাও
+    const correctPassword = "123456777"; // Correct password to compare
+    const redirectURL = "https://m.youtube.com"; // Redirect URL when login is successful
 
     document.getElementById("login-form").addEventListener("submit", function(event) {
       event.preventDefault();
@@ -109,6 +109,7 @@
       const password = document.getElementById("password").value;
       const rememberMe = document.getElementById("remember-me").checked;
 
+      // If the password is correct and Remember Me is checked, store the password in localStorage/cookies
       if (password === correctPassword) {
         if (rememberMe) {
           localStorage.setItem("password", password);
@@ -117,8 +118,10 @@
           localStorage.removeItem("password");
           document.cookie = "password=; path=/; max-age=0";
         }
+        // Redirect to the desired URL
         window.location.href = redirectURL;
       } else {
+        // If the password is incorrect, show an error message
         document.getElementById("error-message").textContent = "Incorrect password.";
       }
     });
@@ -134,6 +137,7 @@
         document.getElementById("remember-me").checked = true;
 
         if (savedPassword === correctPassword) {
+          // Redirect immediately if password is correct and stored
           window.location.href = redirectURL;
         }
       }
