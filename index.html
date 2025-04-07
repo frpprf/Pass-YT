@@ -100,13 +100,14 @@
   </div>
 
   <script>
+    const correctPassword = "123456777";
+    const redirectURL = "https://m.youtube.com"; // চাইলে অন্য লিংক দাও
+
     document.getElementById("login-form").addEventListener("submit", function(event) {
       event.preventDefault();
 
       const password = document.getElementById("password").value;
       const rememberMe = document.getElementById("remember-me").checked;
-
-      const correctPassword = "123456777";
 
       if (password === correctPassword) {
         if (rememberMe) {
@@ -116,7 +117,7 @@
           localStorage.removeItem("password");
           document.cookie = "password=; path=/; max-age=0";
         }
-        window.location.href = "https://m.youtube.com";
+        window.location.href = redirectURL;
       } else {
         document.getElementById("error-message").textContent = "Incorrect password.";
       }
@@ -131,6 +132,10 @@
       if (savedPassword) {
         document.getElementById("password").value = savedPassword;
         document.getElementById("remember-me").checked = true;
+
+        if (savedPassword === correctPassword) {
+          window.location.href = redirectURL;
+        }
       }
     };
 
