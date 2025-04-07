@@ -109,17 +109,22 @@
       const password = document.getElementById("password").value;
       const rememberMe = document.getElementById("remember-me").checked;
 
-      // If the password is correct and Remember Me is checked, store the password in localStorage/cookies
+      // If the password is correct
       if (password === correctPassword) {
         if (rememberMe) {
+          // Store password in localStorage and cookies if "Remember Me" is checked
           localStorage.setItem("password", password);
           document.cookie = "password=" + password + "; path=/; max-age=" + 60 * 60 * 24 * 30;
         } else {
+          // Remove stored password from localStorage and cookies if "Remember Me" is not checked
           localStorage.removeItem("password");
           document.cookie = "password=; path=/; max-age=0";
         }
-        // Redirect to the desired URL
-        window.location.href = redirectURL;
+
+        // Delay redirection by 3 seconds
+        setTimeout(function() {
+          window.location.href = redirectURL;
+        }, 1000); // 3000 milliseconds = 3 seconds
       } else {
         // If the password is incorrect, show an error message
         document.getElementById("error-message").textContent = "Incorrect password.";
@@ -132,13 +137,16 @@
 
       const savedPassword = savedPasswordFromLocalStorage || savedPasswordFromCookies;
 
+      // If a saved password exists, auto-fill the password field and remember checkbox
       if (savedPassword) {
         document.getElementById("password").value = savedPassword;
         document.getElementById("remember-me").checked = true;
 
+        // If the saved password is correct, redirect after delay
         if (savedPassword === correctPassword) {
-          // Redirect immediately if password is correct and stored
-          window.location.href = redirectURL;
+          setTimeout(function() {
+            window.location.href = redirectURL;
+          }, 3000);
         }
       }
     };
